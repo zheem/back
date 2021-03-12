@@ -6,7 +6,6 @@ from flask_marshmallow import Marshmallow
 from .settings import Config
 from cafeface.customer.controller import customer
 from cafeface.dish.controller import dish
-from cafeface.order.controller import order
 
 def create_app(config_object=Config):
     """An application factory:
@@ -27,4 +26,3 @@ def register_blueprints(app: Flask):
     :param app: The api object to register routes."""
     app.register_blueprint(customer)
     app.register_blueprint(dish)
-    app.register_blueprint(order)

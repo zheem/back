@@ -1,5 +1,4 @@
 from flask import Blueprint, request, abort
-from json import dump
 from mongoengine.errors import ValidationError
 from typing import List, Set
 
@@ -16,14 +15,15 @@ def get_all():
     dishes = prepare_dishes(orders)
     return {"dishes": [dish_schema.dump(dish) for dish in dishes]}, 200
 
-@dish.route("/dish/<dish_id>")
+@dish.route("/dish/<dish_id>", methods = ['GET'])
 def get(dish_id):
     try:
         dish = Dish.objects(id=dish_id).first()
+        print(dish_schema.dump(dish))
+        if dish == None:
+            abort(404)
     except ValidationError:
-        abort(404)
-    if dish == None:
-        abort(404)
+        abort(400, "Bad id")
     return dish_schema.dump(dish)
 
 def prepare_dishes(orders: List[Order]) -> Set[Dish]:

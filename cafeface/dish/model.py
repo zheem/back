@@ -5,6 +5,8 @@ class Dish(me.Document):
     image_url = me.URLField()
 
     def __eq__(self, other):
+        if other == None:
+            return super().__eq__(other)
         return int(str(self.id), 16) == int(str(self.id), 16)
 
     def __hash__(self):

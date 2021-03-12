@@ -1,5 +1,4 @@
 from flask import Blueprint, request, abort
-from json import dump
 from mongoengine.errors import ValidationError
 
 from cafeface.order.model import Order
@@ -14,13 +13,17 @@ customer_schema = CustomerSchema()
 def get(customer_id):
     try:
         customer = Customer.objects(id=customer_id).first()
+        if customer == None:
+            abort(404)
     except ValidationError:
-        abort(404)
-    if customer == None:
-        abort(404)
+        abort(400, "Bad id")
     return customer_schema.dump(customer)
 
-@customer.route("/customer/<customer_id>/dishes")
+@customer.route("/customers", methods = ['GET'])
+def get_all():
+    return {"customers": [customer_schema.dump(customer) for customer in Customer.objects.all()]}, 200
+
+@customer.route("/customer/<customer_id>/dishes", methods = ['GET'])
 def get_for_person(customer_id):
     orders = Order.objects(customer=customer_id).all()
     dishes = prepare_dishes(orders)
