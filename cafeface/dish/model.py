@@ -7,7 +7,7 @@ class Dish(me.Document):
     def __eq__(self, other):
         if other == None:
             return super().__eq__(other)
-        return int(str(self.id), 16) == int(str(self.id), 16)
+        return int(str(self.id), 16) == int(str(other.id), 16)
 
     def __hash__(self):
         return int(str(self.id), 16)

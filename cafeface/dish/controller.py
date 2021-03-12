@@ -40,5 +40,5 @@ def prepare_dishes(orders: List[Order]) -> Set[Dish]:
         all_dishes.extend(order.dishes)
     dishes = set(all_dishes)
     for dish in dishes:
-        dish.count = all_dishes.count(dishes)
+        dish.count = all_dishes.count(dish)
     return dishes
