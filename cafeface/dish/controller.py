@@ -19,7 +19,6 @@ def get_all():
 def get(dish_id):
     try:
         dish = Dish.objects(id=dish_id).first()
-        print(dish_schema.dump(dish))
         if dish == None:
             abort(404)
     except ValidationError:
