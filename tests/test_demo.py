@@ -5,7 +5,7 @@ from flask import Flask
 class TestDemo(unittest.TestCase):
 
     def test_demo(self):
-        self.assertTrue(isinstance(create_app(), Flask))
+        self.assertFalse(isinstance(create_app(), Flask))
 
 
 if __name__ == '__main__':
