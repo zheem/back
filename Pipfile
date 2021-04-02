@@ -8,6 +8,7 @@ flask = "*"
 flask-mongoengine = "*"
 flask-marshmallow = "*"
 flask-cors = "*"
+gunicorn = "*"
 
 [dev-packages]
 
